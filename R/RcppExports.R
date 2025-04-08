@@ -269,6 +269,10 @@ cpp_cuda_empty_cache <- function() {
     invisible(.Call(`_torch_cpp_cuda_empty_cache`))
 }
 
+cpp_cuda_nccl_get_unique_id <- function() {
+    .Call(`_torch_cpp_cuda_nccl_get_unique_id`)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call(`_torch_cpp_device_type_to_string`, device)
 }

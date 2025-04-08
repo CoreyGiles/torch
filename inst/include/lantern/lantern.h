@@ -2630,6 +2630,15 @@ HOST_API void* lantern_cuda_get_rng_state (int device)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_cuda_nccl_get_unique_id) ();
+HOST_API void* lantern_cuda_nccl_get_unique_id ()
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cuda_nccl_get_unique_id();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
 LANTERN_API void* (LANTERN_PTR _lantern_cpu_get_rng_state) ();
 HOST_API void* lantern_cpu_get_rng_state ()
 {
@@ -10917,6 +10926,7 @@ LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
 LOAD_SYMBOL(_lantern_amp_update_scale_);
 LOAD_SYMBOL(_lantern_cuda_set_rng_state);
 LOAD_SYMBOL(_lantern_cuda_get_rng_state);
+LOAD_SYMBOL(_lantern_cuda_nccl_get_unique_id);
 LOAD_SYMBOL(_lantern_cpu_get_rng_state);
 LOAD_SYMBOL(_lantern_cpu_set_rng_state);
 LOAD_SYMBOL(_lantern_function_schema_delete);

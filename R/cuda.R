@@ -188,3 +188,10 @@ cuda_runtime_version <- function() {
 cuda_empty_cache <- function() {
   cpp_cuda_empty_cache()
 }
+
+
+#' NCCL Get Unique ID
+#' @export 
+cuda_nccl_get_unique_id <- function() {
+  cpp_cuda_nccl_get_unique_id()
+}

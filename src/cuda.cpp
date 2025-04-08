@@ -37,3 +37,11 @@ int cpp_cuda_get_runtime_version() {
 void cpp_cuda_empty_cache () {
   lantern_cuda_empty_cache();
 }
+
+// [[Rcpp::export]]
+Rcpp::RawVector cpp_cuda_nccl_get_unique_id () {
+  std::string unique_id = torch::string(lantern_cuda_nccl_get_unique_id());
+  Rcpp::RawVector out(unique_id.size());
+  std::copy(unique_id.begin(), unique_id.end(), out.begin());
+  return out;
+}

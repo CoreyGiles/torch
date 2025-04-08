@@ -748,6 +748,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_cuda_nccl_get_unique_id
+Rcpp::RawVector cpp_cuda_nccl_get_unique_id();
+RcppExport SEXP _torch_cpp_cuda_nccl_get_unique_id() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_cuda_nccl_get_unique_id());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -48193,6 +48203,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_cuda_memory_stats", (DL_FUNC) &_torch_cpp_cuda_memory_stats, 1},
     {"_torch_cpp_cuda_get_runtime_version", (DL_FUNC) &_torch_cpp_cuda_get_runtime_version, 0},
     {"_torch_cpp_cuda_empty_cache", (DL_FUNC) &_torch_cpp_cuda_empty_cache, 0},
+    {"_torch_cpp_cuda_nccl_get_unique_id", (DL_FUNC) &_torch_cpp_cuda_nccl_get_unique_id, 0},
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
@@ -52024,7 +52035,7 @@ static const R_CallMethodDef CallEntries[] = {
 };
 
 void register_callables(DllInfo *dll);
-RcppExport void R_init_torchpkg(DllInfo *dll) {
+RcppExport void R_init_torch(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
     register_callables(dll);

@@ -7,6 +7,7 @@
 #include <ATen/cuda/CUDAContext.h>
 #include <ATen/cuda/detail/CUDAHooks.h>
 #include <c10/cuda/CUDACachingAllocator.h>
+#include <torch/csrc/cuda/nccl.h>
 #endif
 #include <torch/torch.h>
 
@@ -233,5 +234,22 @@ void* _lantern_cuda_get_rng_state (int device) {
   LANTERN_FUNCTION_START
   auto gen = at::detail::getCUDAHooks().getDefaultCUDAGenerator(device);
   return make_raw::Tensor(gen.get_state());
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_cuda_nccl_get_unique_id() {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
+  ncclUniqueId uniqueId;
+  get_unique_id(uniqueId);
+  std::string serialized(
+    reinterpret_cast<const char*>(&uniqueId),
+    reinterpret_cast<const char*>(&uniqueId) + sizeof(ncclUniqueId)
+  );
+  return make_raw::string(serialized);
+#else
+  throw std::runtime_error(
+      "`cuda_nccl_get_unique_id` is only supported on CUDA runtimes.");
+#endif
   LANTERN_FUNCTION_END
 }
